@@ -3,8 +3,10 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="#">Films</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Les goonies</li>
+        @if ($produit->category->parent !== null)
+            <li class="breadcrumb-item"><a href="{{ route('voirCategorie', ['id' => $produit->category->parent->id]) }}">{{ $produit->category->parent->nom }}</a></li>
+        @endif
+        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('voirCategorie', ['id' => $produit->category->id]) }}">{{ $produit->category->nom }}</a></li>
     </ol>
 </nav>
 <main role="main">
@@ -26,6 +28,12 @@
                 <h1 class="jumbotron-heading">{{ $produit->nom }}</h1>
                 <h5>{{ $produit->prix }}</h5>
                 <p class="lead text-muted">{{ $produit->description }}</p>
+                @foreach ($produit->tags as $tag)
+
+                    <p class="badge bg-secondary"><a href="{{ route("voirTag",['id' => $tag->id]) }}" class="text-white text-decoration-none">{{ $tag->nom }} </a></p>
+                @endforeach
+
+
                 <hr>
                 <label for="size">Choisissez votre taille</label>
                 <select name="size" id="size" class="form-control">

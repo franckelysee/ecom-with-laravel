@@ -21,4 +21,5 @@ use Illuminate\Support\Facades\Route;;
 Route::get("/", [MainController::class, 'home'])->name('home');
 Route::get("/produit/{id}", [MainController::class, 'produit'])->name('produit');
 Route::get("/categorie/{id}",[MainController::class, 'vueCategory'])->name("voirCategorie");
+Route::get("/tag/{id}",[MainController::class, 'vueTag'])->name("voirTag");
 

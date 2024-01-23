@@ -3,17 +3,24 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        @if (($category->parent) !== null)
-            <li class="breadcrumb-item active" aria-current="page">
-                <a href="{{ route('voirCategorie', ['id' => $category->parent->id]) }}">{{ $category->parent->nom }}</a>
-            </li>
+        @if (isset($category))
+            @if (($category->parent) !== null)
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a href="{{ route('voirCategorie', ['id' => $category->parent->id]) }}">{{ $category->parent->nom }}</a>
+                </li>
+            @endif
+
+            <li class="breadcrumb-item active" aria-current="page">{{ $category->nom }}</li>
+
+            @foreach ($category->children as $children  )
+
+                <li class="breadcrumb-item"><a href="{{ route('voirCategorie', ['id' => $children->id]) }}">{{ $children->nom }}</a></li>
+
+            @endforeach
+        @else
+            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('voirTag', ['id' => $tag->id]) }}">{{ $tag->nom }}</a></li>
         @endif
-        <li class="breadcrumb-item active" aria-current="page">{{ $category->nom }}</li>
-        @foreach ($category->children as $children  )
 
-            <li class="breadcrumb-item"><a href="{{ route('voirCategorie', ['id' => $children->id]) }}">{{ $children->nom }}</a></li>
-
-        @endforeach
     </ol>
 </nav>
 

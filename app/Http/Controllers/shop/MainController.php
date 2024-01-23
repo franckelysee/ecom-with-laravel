@@ -7,6 +7,7 @@ use App\Models\Category;
 use Database\Seeders\ProduitsTableSeeder;
 use Illuminate\Http\Request;
 use App\Models\Produit;
+use App\Models\Tag;
 use Illuminate\Contracts\View\View;
 use Ramsey\Uuid\Type\Integer;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class MainController extends Controller
         // $produit = DB::select('select * from produits where id = ?', [$request->id]);
         // dd($produit[0]->image);
         // $produit = $produit[0];
+
         return view('shop/produit', compact("produit"));
 
     }
@@ -56,6 +58,12 @@ class MainController extends Controller
 
 
         return View('shop.categorie', compact('produits', 'category'));
+    }
+
+    public function vueTag(Request $request){
+        $tag = Tag::find($request->id);
+        $produits = $tag->produits;
+        return View('shop.categorie', compact('produits', 'tag'));
     }
 
 
