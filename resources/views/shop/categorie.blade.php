@@ -29,6 +29,7 @@
                             <img src="{{ asset('produits/'.$produit->image) }}" class="card-img-top img-fluid" alt="Responsive image">
                             <div class="card-body">
                                 <p class="card-text">{{ $produit->nom }}<br> {{ $produit->description }} </p>
+                                <p class="badge bg-secondary"><a href="{{ route("produit",['id' => $produit->id]) }}" class="text-white text-decoration-none">{{ $produit->category->nom }} </a></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="price">{{ number_format($produit->prix ,2) }} €</span>
                                     <a href="{{ route("produit",['id' => $produit->id]) }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>

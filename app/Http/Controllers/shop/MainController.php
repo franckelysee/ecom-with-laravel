@@ -16,7 +16,7 @@ class MainController extends Controller
 
     public function home(){
         //select * from produits
-        $produits = Produit::all();
+        $produits = Produit::with('category')->get();
         // $categories = Category::where("is_online",1)->get();
         // dd($produits);
         return view('shop/index', compact('produits'));
